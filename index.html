@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi tienda</title>
+  <style>
+    :root {
+      --ink-black: #000814;
+      --prussian-blue: #001d3d;
+      --regal-navy: #003566;
+      --school-bus-yellow: #ffc300;
+      --gold: #ffd60a;
+
+      --white: #ffffff;
+      --light-blue: #e8f1fa;
+      --shadow: rgba(0, 8, 20, 0.25);
+    }
+
+    /* ==============================
+       CONFIGURACIÓN GENERAL
+    ================================ */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(circle at top, #003566 0%, #001d3d 35%, #000814 100%);
+      color: var(--white);
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    /* ==============================
+       ENCABEZADO
+    ================================ */
+
+    h1 {
+      margin: 0;
+      padding: 35px 20px 10px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--school-bus-yellow);
+      text-shadow: 3px 3px 0 var(--ink-black);
+      letter-spacing: 1px;
+    }
+
+    .slogan {
+      color: var(--gold);
+      font-size: 21px;
+      font-weight: 700;
+      margin: 5px auto 8px;
+    }
+
+    .presentacion {
+      color: #dcecff;
+      font-size: 16px;
+      margin: 0 auto 25px;
+    }
+
+    /* ==============================
+       BENEFICIOS
+    ================================ */
+
+    .beneficios {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+
+      background: rgba(0, 8, 20, 0.85);
+      border-top: 2px solid var(--school-bus-yellow);
+      border-bottom: 2px solid var(--school-bus-yellow);
+
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .beneficios span {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    /* ==============================
+       CATEGORÍAS
+    ================================ */
+
+    .categorias {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 15px 20px 30px;
+    }
+
+    .categorias span {
+      background: var(--regal-navy);
+      border: 1px solid var(--school-bus-yellow);
+      color: var(--gold);
+      padding: 9px 18px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .categorias span:hover {
+      background: var(--school-bus-yellow);
+      color: var(--ink-black);
+      transform: translateY(-3px);
+    }
+
+    /* ==============================
+       CATÁLOGO
+    ================================ */
+
+    .catalogo {
+      padding: 10px 20px 40px;
+    }
+
+    .catalogo h2 {
+      color: var(--white);
+      font-size: 30px;
+      margin-bottom: 5px;
+    }
+
+    .subtitulo {
+      color: #c8d8ea;
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    /* ==============================
+       PRODUCTOS
+    ================================ */
+
+    #productos {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 25px;
+      max-width: 1250px;
+      margin: auto;
+    }
+
+    .producto {
+      position: relative;
+
+      border: 1px solid rgba(255, 214, 10, 0.35);
+      background: linear-gradient(145deg, #003566, #001d3d);
+
+      border-radius: 14px;
+      padding: 14px;
+
+      width: 230px;
+
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .producto:hover {
+      transform: translateY(-8px);
+      border-color: var(--school-bus-yellow);
+
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.55),
+        0 0 15px rgba(255, 195, 0, 0.15);
+    }
+
+    .producto img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+
+      border-radius: 8px;
+
+      border: 2px solid var(--ink-black);
+
+      background: var(--ink-black);
+    }
+
+    .producto h3 {
+      color: var(--school-bus-yellow);
+      margin: 15px 0 8px;
+      font-size: 18px;
+    }
+
+    .descripcion {
+      font-size: 14px;
+      color: #d7e5f3;
+      min-height: 62px;
+      line-height: 1.4;
+    }
+
+    .precio {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--gold);
+      margin: 15px 0;
+    }
+
+    /* ==============================
+       BOTÓN AGREGAR
+    ================================ */
+
+    .producto button {
+      width: 100%;
+
+      background: var(--school-bus-yellow);
+      border: none;
+
+      color: var(--ink-black);
+
+      padding: 11px 14px;
+      margin-top: 5px;
+
+      border-radius: 7px;
+
+      cursor: pointer;
+
+      font-weight: 800;
+      font-size: 14px;
+
+      transition: 0.25s;
+    }
+
+    .producto button:hover {
+      background: var(--gold);
+      transform: scale(1.03);
+    }
+
+    /* ==============================
+       CARRITO
+    ================================ */
+
+    .carrito {
+      margin: 20px auto 50px;
+      padding: 25px;
+
+      background: linear-gradient(145deg, #001d3d, #000814);
+
+      border: 2px solid var(--school-bus-yellow);
+      border-radius: 14px;
+
+      text-align: left;
+
+      width: min(600px, calc(100% - 30px));
+
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .carrito h2 {
+      margin-top: 0;
+      color: var(--gold);
+    }
+
+    #lista-carrito {
+      padding-left: 20px;
+    }
+
+    #lista-carrito li {
+      margin-bottom: 10px;
+      color: #e8f1fa;
+      line-height: 1.4;
+    }
+
+    .resumen {
+      border-top: 1px solid #35577a;
+      margin-top: 20px;
+      padding-top: 10px;
+    }
+
+    .total {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--school-bus-yellow);
+    }
+
+    /* ==============================
+       BOTONES DEL CARRITO
+    ================================ */
+
+    .vaciar,
+    .finalizar {
+      border: none;
+      color: var(--ink-black);
+
+      padding: 11px 16px;
+
+      margin-top: 10px;
+
+      border-radius: 7px;
+
+      cursor: pointer;
+
+      font-weight: bold;
+
+      transition: 0.25s;
+    }
+
+    .vaciar {
+      background: #e63946;
+      color: white;
+    }
+
+    .finalizar {
+      background: var(--school-bus-yellow);
+      margin-left: 5px;
+    }
+
+    .vaciar:hover,
+    .finalizar:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* ==============================
+       PIE DE PÁGINA
+    ================================ */
+
+    footer {
+      background: var(--ink-black);
+
+      border-top: 2px solid var(--regal-navy);
+
+      padding: 25px 20px;
+
+      color: #a9bfd6;
+
+      margin-top: 20px;
+    }
+
+    footer p:first-child {
+      color: var(--school-bus-yellow);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* ==============================
+       RESPONSIVE
+    ================================ */
+
+    @media (max-width: 600px) {
+
+      body {
+        padding: 0;
+      }
+
+      h1 {
+        font-size: 30px;
+        padding-top: 25px;
+      }
+
+      .slogan {
+        font-size: 17px;
+        padding: 0 15px;
+      }
+
+      .producto {
+        width: min(320px, 90%);
+      }
+
+      .producto img {
+        height: 250px;
+      }
+
+      .beneficios {
+        gap: 10px;
+      }
+
+      .carrito {
+        width: 90%;
+      }
+
+      .vaciar,
+      .finalizar {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Mundial de Vinilos</title>
+    <style>
+  :root {
+    --ink-black: #000814;
+    --prussian-blue: #001d3d;
+    --regal-navy: #003566;
+    --school-bus-yellow: #ffc300;
+    --gold: #ffd60a;
+
+    --white: #ffffff;
+    --light-blue: #e8f1fa;
+    --shadow: rgba(0, 8, 20, 0.25);
+  }
+
+  /* ==============================
+     CONFIGURACIÓN GENERAL
+  ================================ */
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at top, #003566 0%, #001d3d 35%, #000814 100%);
+    color: var(--white);
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    min-height: 100vh;
+  }
+
+  /* ==============================
+     ENCABEZADO
+  ================================ */
+
+  h1 {
+    margin: 0;
+    padding: 35px 20px 10px;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--school-bus-yellow);
+    text-shadow: 3px 3px 0 var(--ink-black);
+    letter-spacing: 1px;
+  }
+
+  .slogan {
+    color: var(--gold);
+    font-size: 21px;
+    font-weight: 700;
+    margin: 5px auto 8px;
+  }
+
+  .presentacion {
+    color: #dcecff;
+    font-size: 16px;
+    margin: 0 auto 25px;
+  }
+
+  /* ==============================
+     BENEFICIOS
+  ================================ */
+
+  .beneficios {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    background: rgba(0, 8, 20, 0.85);
+    border-top: 2px solid var(--school-bus-yellow);
+    border-bottom: 2px solid var(--school-bus-yellow);
+
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+
+  .beneficios span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  /* ==============================
+     CATEGORÍAS
+  ================================ */
+
+  .categorias {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px 20px 30px;
+  }
+
+  .categorias span {
+    background: var(--regal-navy);
+    border: 1px solid var(--school-bus-yellow);
+    color: var(--gold);
+    padding: 9px 18px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .categorias span:hover {
+    background: var(--school-bus-yellow);
+    color: var(--ink-black);
+    transform: translateY(-3px);
+  }
+
+  /* ==============================
+     CATÁLOGO
+  ================================ */
+
+  .catalogo {
+    padding: 10px 20px 40px;
+  }
+
+  .catalogo h2 {
+    color: var(--white);
+    font-size: 30px;
+    margin-bottom: 5px;
+  }
+
+  .subtitulo {
+    color: #c8d8ea;
+    margin-top: 0;
+    margin-bottom: 25px;
+  }
+
+  /* ==============================
+     PRODUCTOS
+  ================================ */
+
+  #productos {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 25px;
+    max-width: 1250px;
+    margin: auto;
+  }
+
+  .producto {
+    position: relative;
+
+    border: 1px solid rgba(255, 214, 10, 0.35);
+    background: linear-gradient(145deg, #003566, #001d3d);
+
+    border-radius: 14px;
+    padding: 14px;
+
+    width: 230px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .producto:hover {
+    transform: translateY(-8px);
+    border-color: var(--school-bus-yellow);
+
+    box-shadow:
+      0 15px 35px rgba(0, 0, 0, 0.55),
+      0 0 15px rgba(255, 195, 0, 0.15);
+  }
+
+  .producto img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    border: 2px solid var(--ink-black);
+
+    background: var(--ink-black);
+  }
+
+  .producto h3 {
+    color: var(--school-bus-yellow);
+    margin: 15px 0 8px;
+    font-size: 18px;
+  }
+
+  .descripcion {
+    font-size: 14px;
+    color: #d7e5f3;
+    min-height: 62px;
+    line-height: 1.4;
+  }
+
+  .precio {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--gold);
+    margin: 15px 0;
+  }
+
+  /* ==============================
+     BOTÓN AGREGAR
+  ================================ */
+
+  .producto button {
+    width: 100%;
+
+    background: var(--school-bus-yellow);
+    border: none;
+
+    color: var(--ink-black);
+
+    padding: 11px 14px;
+    margin-top: 5px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 800;
+    font-size: 14px;
+
+    transition: 0.25s;
+  }
+
+  .producto button:hover {
+    background: var(--gold);
+    transform: scale(1.03);
+  }
+
+  /* ==============================
+     CARRITO
+  ================================ */
+
+  .carrito {
+    margin: 20px auto 50px;
+    padding: 25px;
+
+    background: linear-gradient(145deg, #001d3d, #000814);
+
+    border: 2px solid var(--school-bus-yellow);
+    border-radius: 14px;
+
+    text-align: left;
+
+    width: min(600px, calc(100% - 30px));
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  .carrito h2 {
+    margin-top: 0;
+    color: var(--gold);
+  }
+
+  #lista-carrito {
+    padding-left: 20px;
+  }
+
+  #lista-carrito li {
+    margin-bottom: 10px;
+    color: #e8f1fa;
+    line-height: 1.4;
+  }
+
+  .resumen {
+    border-top: 1px solid #35577a;
+    margin-top: 20px;
+    padding-top: 10px;
+  }
+
+  .total {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--school-bus-yellow);
+  }
+
+  /* ==============================
+     BOTONES DEL CARRITO
+  ================================ */
+
+  .vaciar,
+  .finalizar {
+    border: none;
+    color: var(--ink-black);
+
+    padding: 11px 16px;
+
+    margin-top: 10px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.25s;
+  }
+
+  .vaciar {
+    background: #e63946;
+    color: white;
+  }
+
+  .finalizar {
+    background: var(--school-bus-yellow);
+    margin-left: 5px;
+  }
+
+  .vaciar:hover,
+  .finalizar:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+
+  /* ==============================
+     PIE DE PÁGINA
+  ================================ */
+
+  footer {
+    background: var(--ink-black);
+
+    border-top: 2px solid var(--regal-navy);
+
+    padding: 25px 20px;
+
+    color: #a9bfd6;
+
+    margin-top: 20px;
+  }
+
+  footer p:first-child {
+    color: var(--school-bus-yellow);
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  /* ==============================
+     RESPONSIVE
+  ================================ */
+
+  @media (max-width: 600px) {
+
+    body {
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 30px;
+      padding-top: 25px;
+    }
+
+    .slogan {
+      font-size: 17px;
+      padding: 0 15px;
+    }
+
+    .producto {
+      width: min(320px, 90%);
+    }
+
+    .producto img {
+      height: 250px;
+    }
+
+    .beneficios {
+      gap: 10px;
+    }
+
+    .carrito {
+      width: 90%;
+    }
+
+    .vaciar,
+    .finalizar {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+
+  </style>
+  </head>
+  <body>
+
+    <h1>🎵 La Mundial de Vinilos - Brian Stward Rico</h1>
+
+    <p class="slogan">
+      El sonido que gira, la música que permanece. 🎶
+    </p>
+
+    <p class="presentacion">
+      Vinilos para coleccionistas, melómanos y amantes de la buena música.
+    </p>
+
+    <div class="beneficios">
+      <span>💿 Vinilos originales</span>
+      <span>🚚 Envíos en Bogotá</span>
+      <span>🔒 Compra segura</span>
+      <span>📦 Empaque protegido</span>
+    </div>
+
+    <div class="categorias">
+      <span>🎺 Salsa</span>
+      <span>🎸 Rock</span>
+      <span>🥁 Champeta</span>
+      <span>🎤 Rap</span>
+      <span>🎷 Jazz</span>
+      <span>🎹 Pop</span>
+    </div>
+
+    <section class="catalogo">
+      <h2>🔥 Catálogo destacado</h2>
+      <p class="subtitulo">
+        Descubre discos que hicieron historia y dale una nueva vuelta a tu colección.
+      </p>
+
+      <div id="productos"></div>
+    </section>
+
+    <div class="carrito">
+      <h2>🧾 Carrito de Compras</h2>
+
+      <ul id="lista-carrito"></ul>
+
+      <div class="resumen">
+        <p>Envío: <strong>Gratis</strong></p>
+
+        <p class="total">Total: $<span id="total">0</span></p>
+      </div>
+
+      <button class="vaciar" onclick="vaciarCarrito()">
+        🧼 Vaciar Carrito
+      </button>
+
+      <button class="finalizar" onclick="finalizarCompra()">
+        💿 Finalizar Compra
+      </button>
+    </div>
+
+    <footer>
+      <p>🎵 La Mundial de Vinilos</p>
+      <p>Una pasión que nunca deja de girar.</p>
+      <p>© 2026 Brian Stward Rico</p>
+    </footer>
+
+    <script>
+  /* ==========================================================
+     JS - La Mundial de Vinilos
+     ========================================================== */
+
+  /* ============================== PRODUCTOS ORIGINALES ================================ */
+
+  const productos = [
+    { id: 1, nombre: "Siembra - Willie Colón & Rubén Blades", categoria: "Salsa", descripcion: "Álbum clásico de salsa con canciones inolvidables como Plástico y Pedro Navaja.", precio: 85000, imagen: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=700&q=80" },
+    { id: 2, nombre: "Abbey Road - The Beatles", categoria: "Rock", descripcion: "Una de las obras más importantes de The Beatles y de la historia del rock.", precio: 110000, imagen: "https://images.unsplash.com/photo-1539375665275-f9de415ef9ac?auto=format&fit=crop&w=700&q=80" },
+    { id: 3, nombre: "Champeta Clásica", categoria: "Champeta", descripcion: "Selección de sonidos clásicos de la champeta africana y caribeña.", precio: 75000, imagen: "https://images.unsplash.com/photo-1598387993281-cecf8b71a8f8?auto=format&fit=crop&w=700&q=80" },
+    { id: 4, nombre: "The Miseducation of Lauryn Hill", categoria: "Rap / Hip Hop", descripcion: "Álbum esencial que combina hip hop, soul y R&B con letras memorables.", precio: 125000, imagen: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=80" },
+    { id: 5, nombre: "Kind of Blue - Miles Davis", categoria: "Jazz", descripcion: "Una pieza fundamental del jazz y uno de los discos más influyentes del género.", precio: 135000, imagen: "https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?auto=format&fit=crop&w=700&q=80" },
+    { id: 6, nombre: "Thriller - Michael Jackson", categoria: "Pop", descripcion: "Uno de los álbumes más exitosos de la música pop, presentado en formato vinilo.", precio: 95000, imagen: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=700&q=80" },
+    { id: 7, nombre: "Legend - Bob Marley & The Wailers", categoria: "Reggae", descripcion: "Colección imprescindible de grandes éxitos de Bob Marley.", precio: 105000, imagen: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=700&q=80" },
+    { id: 8, nombre: "Cali Pachanguero - Grupo Niche", categoria: "Salsa Colombiana", descripcion: "Sonidos colombianos y salsa caleña para los verdaderos amantes del género.", precio: 90000, imagen: "https://images.unsplash.com/photo-1571266028243-d220c9c3b5c9?auto=format&fit=crop&w=700&q=80" },
+    { id: 9, nombre: "The Dark Side of the Moon - Pink Floyd", categoria: "Rock", descripcion: "Una experiencia sonora imprescindible para cualquier colección de vinilos.", precio: 120000, imagen: "https://images.unsplash.com/photo-1461360228754-6e81c478b882?auto=format&fit=crop&w=700&q=80" },
+    { id: 10, nombre: "Graduation - Kanye West", categoria: "Rap / Hip Hop", descripcion: "Álbum de hip hop moderno con una producción que marcó una generación.", precio: 115000, imagen: "https://images.unsplash.com/photo-1619983081563-430f63602796?auto=format&fit=crop&w=700&q=80" }
+  ];
+
+  /* ============================== NUEVAS CANCIONES (10 POR GÉNERO) ================================ */
+  // Cada canción: [título, artista]
+
+  const GENEROS = {
+    Salsa: {
+      colores: ["#ffc300", "#c1121f"],
+      canciones: [
+        ["Pedro Navaja", "Rubén Blades"],
+        ["Aguanile", "Héctor Lavoe"],
+        ["Quimbara", "Celia Cruz"],
+        ["Periódico de Ayer", "Héctor Lavoe"],
+        ["Una Aventura", "Grupo Niche"],
+        ["Oye Como Va", "Tito Puente"],
+        ["El Cantante", "Héctor Lavoe"],
+        ["Sin Sentimientos", "Grupo Niche"],
+        ["La Negra Tiene Tumbao", "Celia Cruz"],
+        ["La Rebelión", "Joe Arroyo"]
+      ]
+    },
+    Rock: {
+      colores: ["#e63946", "#000814"],
+      canciones: [
+        ["Bohemian Rhapsody", "Queen"],
+        ["Stairway to Heaven", "Led Zeppelin"],
+        ["Hotel California", "Eagles"],
+        ["Smells Like Teen Spirit", "Nirvana"],
+        ["Sweet Child O' Mine", "Guns N' Roses"],
+        ["Back in Black", "AC/DC"],
+        ["Comfortably Numb", "Pink Floyd"],
+        ["Paint It Black", "The Rolling Stones"],
+        ["Enter Sandman", "Metallica"],
+        ["Livin' on a Prayer", "Bon Jovi"]
+      ]
+    },
+    // OJO: verifica títulos y artistas de Champeta antes de publicar
+    Champeta: {
+      colores: ["#2a9d8f", "#003566"],
+      canciones: [
+        ["El Serrucho", "Louis Towers"],
+        ["El Presidente", "Mr. Black"],
+        ["Pantera", "Viviano Torres"],
+        ["Champeta Criolla", "Varios artistas"],
+        ["La Cartagenera", "Varios artistas"],
+        ["Mapalé Champetúo", "Varios artistas"],
+        ["Rumba Palenquera", "Varios artistas"],
+        ["Sabor Africano", "Varios artistas"],
+        ["Baile del Picó", "Varios artistas"],
+        ["Terapia Criolla", "Varios artistas"]
+      ]
+    },
+    Rap: {
+      colores: ["#7b2cbf", "#000814"],
+      canciones: [
+        ["Lose Yourself", "Eminem"],
+        ["Juicy", "The Notorious B.I.G."],
+        ["California Love", "2Pac"],
+        ["Nuthin' but a 'G' Thang", "Dr. Dre"],
+        ["Empire State of Mind", "Jay-Z"],
+        ["Gold Digger", "Kanye West"],
+        ["In Da Club", "50 Cent"],
+        ["N.Y. State of Mind", "Nas"],
+        ["Straight Outta Compton", "N.W.A"],
+        ["SICKO MODE", "Travis Scott"]
+      ]
+    },
+    Jazz: {
+      colores: ["#1d4e89", "#ffd60a"],
+      canciones: [
+        ["Take Five", "Dave Brubeck"],
+        ["So What", "Miles Davis"],
+        ["A Love Supreme", "John Coltrane"],
+        ["Giant Steps", "John Coltrane"],
+        ["Fly Me to the Moon", "Frank Sinatra"],
+        ["What a Wonderful World", "Louis Armstrong"],
+        ["Summertime", "Ella Fitzgerald"],
+        ["My Funny Valentine", "Chet Baker"],
+        ["'Round Midnight", "Thelonious Monk"],
+        ["The Girl from Ipanema", "Stan Getz"]
+      ]
+    },
+    Pop: {
+      colores: ["#ff4d9d", "#4361ee"],
+      canciones: [
+        ["Billie Jean", "Michael Jackson"],
+        ["Like a Prayer", "Madonna"],
+        ["Beat It", "Michael Jackson"],
+        ["Shape of You", "Ed Sheeran"],
+        ["Rolling in the Deep", "Adele"],
+        ["Blinding Lights", "The Weeknd"],
+        ["Dancing Queen", "ABBA"],
+        ["Toxic", "Britney Spears"],
+        ["Bad Romance", "Lady Gaga"],
+        ["Shake It Off", "Taylor Swift"]
+      ]
+    }
+  };
+
+  /* ============================== IMAGEN GENERADA (DISCO CON EL NOMBRE) ================================ */
+
+  function escaparXML(t) {
+    return t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function partirTexto(texto, max) {
+    const lineas = [];
+    let actual = "";
+    texto.split(" ").forEach(p => {
+      if ((actual + " " + p).trim().length > max) {
+        if (actual) lineas.push(actual);
+        actual = p;
+      } else {
+        actual = (actual + " " + p).trim();
+      }
+    });
+    if (actual) lineas.push(actual);
+    return lineas.slice(0, 3);
+  }
+
+  function crearImagen(titulo, genero, colores) {
+    const lineas = partirTexto(titulo, 16);
+    const tspans = lineas
+      .map((l, i) => `<tspan x="150" dy="${i === 0 ? 0 : 24}">${escaparXML(l)}</tspan>`)
+      .join("");
+
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${colores[0]}"/><stop offset="1" stop-color="${colores[1]}"/></linearGradient></defs>
+  <rect width="300" height="300" fill="url(#g)"/>
+  <circle cx="150" cy="150" r="128" fill="#0b0b0f"/>
+  <circle cx="150" cy="150" r="110" fill="none" stroke="#2b2b33" stroke-width="2"/>
+  <circle cx="150" cy="150" r="95" fill="none" stroke="#2b2b33" stroke-width="2"/>
+  <circle cx="150" cy="150" r="80" fill="none" stroke="#2b2b33" stroke-width="2"/>
+  <circle cx="150" cy="150" r="58" fill="${colores[0]}"/>
+  <circle cx="150" cy="150" r="6" fill="#0b0b0f"/>
+  <text x="150" y="${lineas.length > 1 ? 118 : 128}" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#000814">${tspans}</text>
+  <text x="150" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">${escaparXML(genero.toUpperCase())}</text>
+  </svg>`;
+
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  /* Agregar las canciones a la lista de productos */
+
+  let siguienteId = productos.length + 1;
+
+  Object.entries(GENEROS).forEach(([genero, datos]) => {
+    datos.canciones.forEach(([titulo, artista], i) => {
+      productos.push({
+        id: siguienteId++,
+        nombre: `${titulo} - ${artista}`,
+        categoria: genero,
+        descripcion: `Vinilo con "${titulo}" de ${artista}.`,
+        precio: 95000 + ((i * 6000) % 60000),
+        // Para usar una portada real: cambia esta línea por "img/mi-portada.jpg"
+        imagen: crearImagen(titulo, genero, datos.colores)
+      });
+    });
+  });
+
+  /* ============================== CARRITO ================================ */
+
+  const carrito = [];
+
+  const contenedorProductos = document.getElementById("productos");
+  const listaCarrito = document.getElementById("lista-carrito");
+  const totalCarrito = document.getElementById("total");
+
+  let categoriaActiva = "Todos";
+
+  /* ============================== MOSTRAR PRODUCTOS ================================ */
+
+  function mostrarProductos() {
+    contenedorProductos.innerHTML = "";
+
+    const lista = categoriaActiva === "Todos"
+      ? productos
+      : productos.filter(p => p.categoria.includes(categoriaActiva));
+
+    lista.forEach(prod => {
+      const div = document.createElement("div");
+      div.className = "producto";
+
+      div.innerHTML = `
+        <img src="${prod.imagen}" alt="Vinilo ${escaparXML(prod.nombre)}" loading="lazy" onerror="this.closest('.producto').remove()">
+
+        <h3>${prod.nombre}</h3>
+
+        <p class="descripcion">
+          <strong>${prod.categoria}</strong><br>
+          ${prod.descripcion}
+        </p>
+
+        <p class="precio">
+          ${prod.precio.toLocaleString("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 })}
+        </p>
+
+        <button onclick="agregarAlCarrito(${prod.id})">
+          💿 Agregar al carrito
+        </button>
+      `;
+
+      contenedorProductos.appendChild(div);
+    });
+  }
+
+  /* ============================== FILTRO POR CATEGORÍA ================================ */
+
+  function activarCategorias() {
+    const barra = document.querySelector(".categorias");
+
+    const todos = document.createElement("span");
+    todos.textContent = "💿 Todos";
+    barra.insertBefore(todos, barra.firstChild);
+
+    const botones = barra.querySelectorAll("span");
+
+    function marcar(activo) {
+      botones.forEach(b => {
+        b.style.cursor = "pointer";
+        b.style.background = "";
+        b.style.color = "";
+      });
+      activo.style.background = "#ffc300";
+      activo.style.color = "#000814";
+    }
+
+    botones.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const texto = btn.textContent.trim();
+        categoriaActiva = texto.includes("Todos")
+          ? "Todos"
+          : Object.keys(GENEROS).find(g => texto.includes(g));
+        marcar(btn);
+        mostrarProductos();
+      });
+    });
+
+    marcar(todos);
+  }
+
+  /* ============================== AGREGAR AL CARRITO ================================ */
+
+  function agregarAlCarrito(id) {
+    const productoExistente = carrito.find(p => p.id === id);
+
+    if (productoExistente) {
+      productoExistente.cantidad++;
+    } else {
+      const producto = productos.find(p => p.id === id);
+      carrito.push({ ...producto, cantidad: 1 });
+    }
+
+    actualizarCarrito();
+  }
+
+  /* ============================== ACTUALIZAR CARRITO ================================ */
+
+  function actualizarCarrito() {
+    listaCarrito.innerHTML = "";
+
+    let total = 0;
+    let totalItems = 0;
+
+    carrito.forEach(item => {
+      const li = document.createElement("li");
+      const subtotal = item.precio * item.cantidad;
+
+      li.textContent =
+        `${item.nombre} x${item.cantidad} — ` +
+        subtotal.toLocaleString("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 });
+
+      listaCarrito.appendChild(li);
+
+      total += subtotal;
+      totalItems += item.cantidad;
+    });
+
+    totalCarrito.textContent = total.toLocaleString("es-CO");
+
+    actualizarTituloCarrito(totalItems);
+  }
+
+  /* ============================== CONTADOR DEL CARRITO ================================ */
+
+  function actualizarTituloCarrito(cantidad) {
+    const titulo = document.querySelector(".carrito h2");
+    titulo.textContent = `🧾 Carrito de Compras (${cantidad})`;
+  }
+
+  /* ============================== VACIAR CARRITO ================================ */
+
+  function vaciarCarrito() {
+    if (carrito.length === 0) {
+      alert("🛒 El carrito ya está vacío.");
+      return;
+    }
+
+    if (confirm("¿Estás seguro de que quieres vaciar el carrito?")) {
+      carrito.length = 0;
+      actualizarCarrito();
+    }
+  }
+
+  /* ============================== FINALIZAR COMPRA ================================ */
+
+  function finalizarCompra() {
+    if (carrito.length === 0) {
+      alert("🛒 Tu carrito está vacío. Agrega algunos vinilos antes de finalizar la compra.");
+      return;
+    }
+
+    alert(
+      "🎉 ¡Pedido simulado confirmado!\n\n" +
+      "Gracias por comprar en La Mundial de Vinilos.\n" +
+      "Tu colección está a punto de crecer. 💿🎶"
+    );
+
+    carrito.length = 0;
+    actualizarCarrito();
+  }
+
+  /* ============================== INICIAR TIENDA ================================ */
+
+  activarCategorias();
+  mostrarProductos();
+
+  </script>
+  </body>
+  </html>
+
+  <script>
+    /* ==========================================================
+       JS - La Mundial de Vinilos
+       ========================================================== */
+
+    /* ============================== PRODUCTOS ORIGINALES ================================ */
+
+    const productos = [
+      { id: 1, nombre: "Siembra - Willie Colón & Rubén Blades", categoria: "Salsa", descripcion: "Álbum clásico de salsa con canciones inolvidables como Plástico y Pedro Navaja.", precio: 85000, imagen: "https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=700&q=80" },
+      { id: 2, nombre: "Abbey Road - The Beatles", categoria: "Rock", descripcion: "Una de las obras más importantes de The Beatles y de la historia del rock.", precio: 110000, imagen: "https://images.unsplash.com/photo-1539375665275-f9de415ef9ac?auto=format&fit=crop&w=700&q=80" },
+      { id: 3, nombre: "Champeta Clásica", categoria: "Champeta", descripcion: "Selección de sonidos clásicos de la champeta africana y caribeña.", precio: 75000, imagen: "https://images.unsplash.com/photo-1598387993281-cecf8b71a8f8?auto=format&fit=crop&w=700&q=80" },
+      { id: 4, nombre: "The Miseducation of Lauryn Hill", categoria: "Rap / Hip Hop", descripcion: "Álbum esencial que combina hip hop, soul y R&B con letras memorables.", precio: 125000, imagen: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=80" },
+      { id: 5, nombre: "Kind of Blue - Miles Davis", categoria: "Jazz", descripcion: "Una pieza fundamental del jazz y uno de los discos más influyentes del género.", precio: 135000, imagen: "https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?auto=format&fit=crop&w=700&q=80" },
+      { id: 6, nombre: "Thriller - Michael Jackson", categoria: "Pop", descripcion: "Uno de los álbumes más exitosos de la música pop, presentado en formato vinilo.", precio: 95000, imagen: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=700&q=80" },
+      { id: 7, nombre: "Legend - Bob Marley & The Wailers", categoria: "Reggae", descripcion: "Colección imprescindible de grandes éxitos de Bob Marley.", precio: 105000, imagen: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=700&q=80" },
+      { id: 8, nombre: "Cali Pachanguero - Grupo Niche", categoria: "Salsa Colombiana", descripcion: "Sonidos colombianos y salsa caleña para los verdaderos amantes del género.", precio: 90000, imagen: "https://images.unsplash.com/photo-1571266028243-d220c9c3b5c9?auto=format&fit=crop&w=700&q=80" },
+      { id: 9, nombre: "The Dark Side of the Moon - Pink Floyd", categoria: "Rock", descripcion: "Una experiencia sonora imprescindible para cualquier colección de vinilos.", precio: 120000, imagen: "https://images.unsplash.com/photo-1461360228754-6e81c478b882?auto=format&fit=crop&w=700&q=80" },
+      { id: 10, nombre: "Graduation - Kanye West", categoria: "Rap / Hip Hop", descripcion: "Álbum de hip hop moderno con una producción que marcó una generación.", precio: 115000, imagen: "https://images.unsplash.com/photo-1619983081563-430f63602796?auto=format&fit=crop&w=700&q=80" }
+    ];
+
+    /* ============================== NUEVAS CANCIONES (10 POR GÉNERO) ================================ */
+    // Cada canción: [título, artista]
+
+    const GENEROS = {
+      Salsa: {
+        colores: ["#ffc300", "#c1121f"],
+        canciones: [
+          ["Pedro Navaja", "Rubén Blades"],
+          ["Aguanile", "Héctor Lavoe"],
+          ["Quimbara", "Celia Cruz"],
+          ["Periódico de Ayer", "Héctor Lavoe"],
+          ["Una Aventura", "Grupo Niche"],
+          ["Oye Como Va", "Tito Puente"],
+          ["El Cantante", "Héctor Lavoe"],
+          ["Sin Sentimientos", "Grupo Niche"],
+          ["La Negra Tiene Tumbao", "Celia Cruz"],
+          ["La Rebelión", "Joe Arroyo"]
+        ]
+      },
+      Rock: {
+        colores: ["#e63946", "#000814"],
+        canciones: [
+          ["Bohemian Rhapsody", "Queen"],
+          ["Stairway to Heaven", "Led Zeppelin"],
+          ["Hotel California", "Eagles"],
+          ["Smells Like Teen Spirit", "Nirvana"],
+          ["Sweet Child O' Mine", "Guns N' Roses"],
+          ["Back in Black", "AC/DC"],
+          ["Comfortably Numb", "Pink Floyd"],
+          ["Paint It Black", "The Rolling Stones"],
+          ["Enter Sandman", "Metallica"],
+          ["Livin' on a Prayer", "Bon Jovi"]
+        ]
+      },
+      // OJO: verifica títulos y artistas de Champeta antes de publicar
+      Champeta: {
+        colores: ["#2a9d8f", "#003566"],
+        canciones: [
+          ["El Serrucho", "Louis Towers"],
+          ["El Presidente", "Mr. Black"],
+          ["Pantera", "Viviano Torres"],
+          ["Champeta Criolla", "Varios artistas"],
+          ["La Cartagenera", "Varios artistas"],
+          ["Mapalé Champetúo", "Varios artistas"],
+          ["Rumba Palenquera", "Varios artistas"],
+          ["Sabor Africano", "Varios artistas"],
+          ["Baile del Picó", "Varios artistas"],
+          ["Terapia Criolla", "Varios artistas"]
+        ]
+      },
+      Rap: {
+        colores: ["#7b2cbf", "#000814"],
+        canciones: [
+          ["Lose Yourself", "Eminem"],
+          ["Juicy", "The Notorious B.I.G."],
+          ["California Love", "2Pac"],
+          ["Nuthin' but a 'G' Thang", "Dr. Dre"],
+          ["Empire State of Mind", "Jay-Z"],
+          ["Gold Digger", "Kanye West"],
+          ["In Da Club", "50 Cent"],
+          ["N.Y. State of Mind", "Nas"],
+          ["Straight Outta Compton", "N.W.A"],
+          ["SICKO MODE", "Travis Scott"]
+        ]
+      },
+      Jazz: {
+        colores: ["#1d4e89", "#ffd60a"],
+        canciones: [
+          ["Take Five", "Dave Brubeck"],
+          ["So What", "Miles Davis"],
+          ["A Love Supreme", "John Coltrane"],
+          ["Giant Steps", "John Coltrane"],
+          ["Fly Me to the Moon", "Frank Sinatra"],
+          ["What a Wonderful World", "Louis Armstrong"],
+          ["Summertime", "Ella Fitzgerald"],
+          ["My Funny Valentine", "Chet Baker"],
+          ["'Round Midnight", "Thelonious Monk"],
+          ["The Girl from Ipanema", "Stan Getz"]
+        ]
+      },
+      Pop: {
+        colores: ["#ff4d9d", "#4361ee"],
+        canciones: [
+          ["Billie Jean", "Michael Jackson"],
+          ["Like a Prayer", "Madonna"],
+          ["Beat It", "Michael Jackson"],
+          ["Shape of You", "Ed Sheeran"],
+          ["Rolling in the Deep", "Adele"],
+          ["Blinding Lights", "The Weeknd"],
+          ["Dancing Queen", "ABBA"],
+          ["Toxic", "Britney Spears"],
+          ["Bad Romance", "Lady Gaga"],
+          ["Shake It Off", "Taylor Swift"]
+        ]
+      }
+    };
+
+    /* ============================== IMAGEN GENERADA (DISCO CON EL NOMBRE) ================================ */
+
+    function escaparXML(t) {
+      return t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function partirTexto(texto, max) {
+      const lineas = [];
+      let actual = "";
+      texto.split(" ").forEach(p => {
+        if ((actual + " " + p).trim().length > max) {
+          if (actual) lineas.push(actual);
+          actual = p;
+        } else {
+          actual = (actual + " " + p).trim();
+        }
+      });
+      if (actual) lineas.push(actual);
+      return lineas.slice(0, 3);
+    }
+
+    function crearImagen(titulo, genero, colores) {
+      const lineas = partirTexto(titulo, 16);
+      const tspans = lineas
+        .map((l, i) => `<tspan x="150" dy="${i === 0 ? 0 : 24}">${escaparXML(l)}</tspan>`)
+        .join("");
+
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${colores[0]}"/><stop offset="1" stop-color="${colores[1]}"/></linearGradient></defs>
+    <rect width="300" height="300" fill="url(#g)"/>
+    <circle cx="150" cy="150" r="128" fill="#0b0b0f"/>
+    <circle cx="150" cy="150" r="110" fill="none" stroke="#2b2b33" stroke-width="2"/>
+    <circle cx="150" cy="150" r="95" fill="none" stroke="#2b2b33" stroke-width="2"/>
+    <circle cx="150" cy="150" r="80" fill="none" stroke="#2b2b33" stroke-width="2"/>
+    <circle cx="150" cy="150" r="58" fill="${colores[0]}"/>
+    <circle cx="150" cy="150" r="6" fill="#0b0b0f"/>
+    <text x="150" y="${lineas.length > 1 ? 118 : 128}" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#000814">${tspans}</text>
+    <text x="150" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">${escaparXML(genero.toUpperCase())}</text>
+    </svg>`;
+
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    }
+
+    /* Agregar las canciones a la lista de productos */
+
+    let siguienteId = productos.length + 1;
+
+    Object.entries(GENEROS).forEach(([genero, datos]) => {
+      datos.canciones.forEach(([titulo, artista], i) => {
+        productos.push({
+          id: siguienteId++,
+          nombre: `${titulo} - ${artista}`,
+          categoria: genero,
+          descripcion: `Vinilo con "${titulo}" de ${artista}.`,
+          precio: 95000 + ((i * 6000) % 60000),
+          // Para usar una portada real: cambia esta línea por "img/mi-portada.jpg"
+          imagen: crearImagen(titulo, genero, datos.colores)
+        });
+      });
+    });
+
+    /* ============================== CARRITO ================================ */
+
+    const carrito = [];
+
+    const contenedorProductos = document.getElementById("productos");
+    const listaCarrito = document.getElementById("lista-carrito");
+    const totalCarrito = document.getElementById("total");
+
+    let categoriaActiva = "Todos";
+
+    /* ============================== MOSTRAR PRODUCTOS ================================ */
+
+    function mostrarProductos() {
+      contenedorProductos.innerHTML = "";
+
+      const lista = categoriaActiva === "Todos"
+        ? productos
+        : productos.filter(p => p.categoria.includes(categoriaActiva));
+
+      lista.forEach(prod => {
+        const div = document.createElement("div");
+        div.className = "producto";
+
+        div.innerHTML = `
+          <img src="${prod.imagen}" alt="Vinilo ${escaparXML(prod.nombre)}" loading="lazy" onerror="this.closest('.producto').remove()">
+
+          <h3>${prod.nombre}</h3>
+
+          <p class="descripcion">
+            <strong>${prod.categoria}</strong><br>
+            ${prod.descripcion}
+          </p>
+
+          <p class="precio">
+            ${prod.precio.toLocaleString("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 })}
+          </p>
+
+          <button onclick="agregarAlCarrito(${prod.id})">
+            💿 Agregar al carrito
+          </button>
+        `;
+
+        contenedorProductos.appendChild(div);
+      });
+    }
+
+    /* ============================== FILTRO POR CATEGORÍA ================================ */
+
+    function activarCategorias() {
+      const barra = document.querySelector(".categorias");
+
+      const todos = document.createElement("span");
+      todos.textContent = "💿 Todos";
+      barra.insertBefore(todos, barra.firstChild);
+
+      const botones = barra.querySelectorAll("span");
+
+      function marcar(activo) {
+        botones.forEach(b => {
+          b.style.cursor = "pointer";
+          b.style.background = "";
+          b.style.color = "";
+        });
+        activo.style.background = "#ffc300";
+        activo.style.color = "#000814";
+      }
+
+      botones.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const texto = btn.textContent.trim();
+          categoriaActiva = texto.includes("Todos")
+            ? "Todos"
+            : Object.keys(GENEROS).find(g => texto.includes(g));
+          marcar(btn);
+          mostrarProductos();
+        });
+      });
+
+      marcar(todos);
+    }
+
+    /* ============================== AGREGAR AL CARRITO ================================ */
+
+    function agregarAlCarrito(id) {
+      const productoExistente = carrito.find(p => p.id === id);
+
+      if (productoExistente) {
+        productoExistente.cantidad++;
+      } else {
+        const producto = productos.find(p => p.id === id);
+        carrito.push({ ...producto, cantidad: 1 });
+      }
+
+      actualizarCarrito();
+    }
+
+    /* ============================== ACTUALIZAR CARRITO ================================ */
+
+    function actualizarCarrito() {
+      listaCarrito.innerHTML = "";
+
+      let total = 0;
+      let totalItems = 0;
+
+      carrito.forEach(item => {
+        const li = document.createElement("li");
+        const subtotal = item.precio * item.cantidad;
+
+        li.textContent =
+          `${item.nombre} x${item.cantidad} — ` +
+          subtotal.toLocaleString("es-CO", { style: "currency", currency: "COP", minimumFractionDigits: 0 });
+
+        listaCarrito.appendChild(li);
+
+        total += subtotal;
+        totalItems += item.cantidad;
+      });
+
+      totalCarrito.textContent = total.toLocaleString("es-CO");
+
+      actualizarTituloCarrito(totalItems);
+    }
+
+    /* ============================== CONTADOR DEL CARRITO ================================ */
+
+    function actualizarTituloCarrito(cantidad) {
+      const titulo = document.querySelector(".carrito h2");
+      titulo.textContent = `🧾 Carrito de Compras (${cantidad})`;
+    }
+
+    /* ============================== VACIAR CARRITO ================================ */
+
+    function vaciarCarrito() {
+      if (carrito.length === 0) {
+        alert("🛒 El carrito ya está vacío.");
+        return;
+      }
+
+      if (confirm("¿Estás seguro de que quieres vaciar el carrito?")) {
+        carrito.length = 0;
+        actualizarCarrito();
+      }
+    }
+
+    /* ============================== FINALIZAR COMPRA ================================ */
+
+    function finalizarCompra() {
+      if (carrito.length === 0) {
+        alert("🛒 Tu carrito está vacío. Agrega algunos vinilos antes de finalizar la compra.");
+        return;
+      }
+
+      alert(
+        "🎉 ¡Pedido simulado confirmado!\n\n" +
+        "Gracias por comprar en La Mundial de Vinilos.\n" +
+        "Tu colección está a punto de crecer. 💿🎶"
+      );
+
+      carrito.length = 0;
+      actualizarCarrito();
+    }
+
+    /* ============================== INICIAR TIENDA ================================ */
+
+    activarCategorias();
+    mostrarProductos();
+  </script>
+</body>
+</html>
